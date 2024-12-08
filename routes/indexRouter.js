@@ -19,4 +19,8 @@ indexRouter.get("/", (req, res) => {
   res.render("index", { messages: messages });
 });
 
+indexRouter.post("/new", (req, res) => {
+  res.send("Submit sent");
+});
+
 module.exports = indexRouter;

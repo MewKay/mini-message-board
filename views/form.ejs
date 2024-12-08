@@ -6,6 +6,15 @@
     <title>My Mini Messageboard</title>
   </head>
   <body>
-    This is form
+    <form method="POST" action="/new">
+      <h2>Write a new message</h2>
+      <label for="user-name">Username :</label>
+      <input id="user-name" type="text" name="user" />
+
+      <label for="user-message">Message :</label>
+      <input id="user-message" type="text" name="text" />
+
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
