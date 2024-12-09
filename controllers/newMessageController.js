@@ -5,11 +5,12 @@ const newMessageRender = function displayNewMessageForm(req, res) {
 };
 
 const addNewMessage = function addNewMessageFromForm(req, res) {
+  const id = messages.length;
   const text = req.body.text;
   const user = req.body.user;
   const added = new Date();
 
-  messages.push({ text, user, added });
+  messages.push({ id, text, user, added });
 
   res.redirect("/");
 };

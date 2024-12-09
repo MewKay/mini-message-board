@@ -11,13 +11,14 @@ const toPreviewMessages = function shortenMessagesDisplay(message) {
   const previewAdded = formatDistanceToNowStrict(message.added);
 
   return {
+    id: message.id,
     text: previewText,
     user: message.user,
     added: previewAdded,
   };
 };
 
-const indexRender = (req, res) => {
+const indexRender = function displayMessagesList(req, res) {
   const previewMessages = messages.map(toPreviewMessages);
   res.render("index", { messages: previewMessages });
 };

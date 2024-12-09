@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 //Routers setup
 const indexRouter = require("./routes/indexRouter");
 const newMessageRouter = require("./routes/newMessageRouter");
+const detailsRouter = require("./routes/detailsRouter");
 app.use("/", indexRouter);
 app.use("/new", newMessageRouter);
+app.use("/:messageId", detailsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
