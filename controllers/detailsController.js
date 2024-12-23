@@ -1,9 +1,10 @@
 const { format } = require("date-fns/format");
-const messages = require("../messages");
+const { getMessageWithId } = require("../db/queries");
 
-const detailsRender = function displayMessageDetails(req, res) {
+const detailsRender = async function displayMessageDetails(req, res) {
   const messageId = Number(req.params.messageId);
-  const messageQuery = messages.find((message) => message.id === messageId);
+  const messageQuery = await getMessageWithId(messageId);
+  console.log(messageQuery);
 
   //Date format example: Jan 1st, 2000 - 12:00 PM
   const formattedAddedDate = format(messageQuery.added, "PP - p");

@@ -10,4 +10,19 @@ const getAllMessages = async function queryAllMessagesInformationFromDB() {
   return rows;
 };
 
-module.exports = { getAllMessages };
+const getMessageWithId = async function queryMessageMatchingTheIdFromDB(
+  messageId
+) {
+  const query = `
+    SELECT *
+    FROM messages
+    WHERE id = $1
+  `;
+  const data = [messageId];
+
+  const { rows } = await pool.query(query, data);
+  const queriedMessage = rows[0];
+  return queriedMessage;
+};
+
+module.exports = { getAllMessages, getMessageWithId };
