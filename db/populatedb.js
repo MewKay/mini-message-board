@@ -1,7 +1,6 @@
 #! usr/bin/env node
 
 const { Client } = require("pg");
-require("dotenv").config();
 
 const query = `
   CREATE TABLE IF NOT EXISTS messages(
@@ -19,18 +18,27 @@ const query = `
 ;
 `;
 
+//Url can be passed as the first argument of the script
+const DATABASE_URL = process.argv[2];
+
 const main = async () => {
   console.log("seeding...");
+  let client;
 
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-  });
+  try {
+    client = new Client({
+      connectionString: DATABASE_URL,
+    });
 
-  await client.connect();
-  await client.query(query);
-  await client.end();
+    await client.connect();
+    await client.query(query);
 
-  console.log("done");
+    console.log("done");
+  } catch (e) {
+    console.error(e);
+  } finally {
+    if (client) await client.end();
+  }
 };
 
 main();
