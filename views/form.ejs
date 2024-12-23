@@ -9,10 +9,24 @@
     <form method="POST" action="/new">
       <h2>Write a new message</h2>
       <label for="user-name">Username :</label>
-      <input id="user-name" type="text" name="user" />
+      <input
+        id="user-name"
+        type="text"
+        name="username"
+        minlength="3"
+        maxlength="20"
+        required
+      />
 
       <label for="user-message">Message :</label>
-      <input id="user-message" type="text" name="text" />
+      <input
+        id="user-message"
+        type="text"
+        name="text"
+        minlength="1"
+        maxlength="200"
+        required
+      />
 
       <button type="submit">Submit</button>
     </form>

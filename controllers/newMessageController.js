@@ -1,16 +1,13 @@
-const messages = require("../messages");
+const { insertNewMessage } = require("../db/queries");
 
 const newMessageRender = function displayNewMessageForm(req, res) {
   res.render("form");
 };
 
-const addNewMessage = function addNewMessageFromForm(req, res) {
-  const id = messages.length;
+const addNewMessage = async function addNewMessageFromForm(req, res) {
   const text = req.body.text;
-  const user = req.body.user;
-  const added = new Date();
-
-  messages.push({ id, text, user, added });
+  const username = req.body.username;
+  await insertNewMessage(text, username);
 
   res.redirect("/");
 };

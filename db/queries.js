@@ -25,4 +25,15 @@ const getMessageWithId = async function queryMessageMatchingTheIdFromDB(
   return queriedMessage;
 };
 
-module.exports = { getAllMessages, getMessageWithId };
+const insertNewMessage = async function insertMessageIntoTheDB(text, username) {
+  //'id' is auto-incremented and 'added' is set to NOW() by default
+  const query = `
+    INSERT INTO messages(text, username)
+    VALUES ($1, $2)
+  `;
+  const data = [text, username];
+
+  await pool.query(query, data);
+};
+
+module.exports = { getAllMessages, getMessageWithId, insertNewMessage };
