@@ -1,4 +1,4 @@
-const messages = require("../messages");
+const { getAllMessages } = require("../db/queries");
 const { formatDistanceToNowStrict } = require("date-fns");
 
 const toPreviewMessages = function shortenMessagesDisplay(message) {
@@ -13,12 +13,13 @@ const toPreviewMessages = function shortenMessagesDisplay(message) {
   return {
     id: message.id,
     text: previewText,
-    user: message.user,
+    username: message.username,
     added: previewAdded,
   };
 };
 
-const indexRender = function displayMessagesList(req, res) {
+const indexRender = async function displayMessagesList(req, res) {
+  const messages = await getAllMessages();
   const previewMessages = messages.map(toPreviewMessages);
   res.render("index", { messages: previewMessages });
 };
