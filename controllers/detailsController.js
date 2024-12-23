@@ -4,7 +4,6 @@ const { getMessageWithId } = require("../db/queries");
 const detailsRender = async function displayMessageDetails(req, res) {
   const messageId = Number(req.params.messageId);
   const messageQuery = await getMessageWithId(messageId);
-  console.log(messageQuery);
 
   //Date format example: Jan 1st, 2000 - 12:00 PM
   const formattedAddedDate = format(messageQuery.added, "PP - p");
